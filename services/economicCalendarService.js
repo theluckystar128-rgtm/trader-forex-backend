@@ -3,12 +3,12 @@ const API_KEY = process.env.ECONOMIC_CALENDAR_API_KEY; // Set your API key in en
 
 const getEconomicEvents = async () => {
   try {
-    const url = 'https://api.tradingeconomics.com/calendar'; // placeholder
-    // Example: fetch from TradingEconomics (you need API key)
-    const res = await axios.get(`${url}?c=${API_KEY}`);
+    const url = `https://api.tradingeconomics.com/calendar/country/all`;
 
+    const res = await axios.get(`${url}?c=${API_KEY}`);
     return res.data;
-  } catch (err) {
+
+} catch (err) {
     console.error(err);
     return [];
   }

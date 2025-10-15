@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 // Add new trade
 router.post('/', upload.single('screenshot'), async (req, res) => {
   try {
-    const { note, date } = req.body;
+    const { note, date, screenshotBase64 } = req.body;
     let screenshotUrl = null;
 
     if (req.file) {
@@ -28,7 +28,7 @@ router.post('/', upload.single('screenshot'), async (req, res) => {
       screenshotUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
     }
 
-    const docRef = await db.collection('trades').add({ note, date, screenshotUrl });
+    const docRef = await db.collection('trades').add({ note, date, screenshotUrl, screenshotBase64 });
     res.json({ id: docRef.id });
   } catch(err) {
     res.status(500).json({ error: err.message });
